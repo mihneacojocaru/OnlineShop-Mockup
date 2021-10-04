@@ -1,0 +1,47 @@
+.log-in{
+    position: absolute;
+    inset: 0;
+    min-height: 100vh;
+    background-color: $font-color-4;
+    @include flexy($just:center,$align:center);
+}
+
+.log-in-container{
+    background-color: $white-background;
+    height: 20em;
+    width: 40em;
+    position: relative;
+    @include flexy($align:center,$just:space-around,$dir:column);
+
+    .close{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    form{
+        @include flexy($align:center,$just:center,$dir:column);
+        & > *{
+            margin: 5px 0;
+        }
+
+        input{
+            padding: 10px 5px;
+        }
+        button{
+            padding: 10px 77px;
+            background-color: $font-color-4;
+            border-radius: 5px;
+            border: 0;
+            color: $font-color-1;
+            &:hover{
+                background-color: $font-color-3;
+            }
+            &:active{
+                background-color: $font-color-5;
+            }
+        }
+    }
+}

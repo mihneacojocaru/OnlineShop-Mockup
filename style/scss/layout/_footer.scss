@@ -1,0 +1,13 @@
+footer{
+    padding: 10px;
+    background-color: $secondary-background;
+    @include flexy($disp: flex, $dir: row, $just: space-between, $align: center);
+
+    & a{
+        color: $font-color-4;
+    }
+
+    & i{
+        cursor: pointer;
+    }
+}

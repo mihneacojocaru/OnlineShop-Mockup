@@ -344,6 +344,10 @@ template {
   box-sizing: border-box;
 }
 
+html, body {
+  position: relative;
+}
+
 body {
   display: grid;
   grid-template-columns: minmax(100px, 1fr);
@@ -365,7 +369,7 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #eff2f3;
+  background-color: #d7dcdd;
   padding: 10px;
 }
 nav h3 a {
@@ -383,6 +387,116 @@ nav .icons div {
 nav .icons div i {
   cursor: pointer;
   color: #3b4446;
+}
+
+main {
+  min-height: 90vh;
+  background-color: #eff2f3;
+}
+main h2 {
+  padding: 10px;
+}
+
+footer {
+  padding: 10px;
+  background-color: #d7dcdd;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+footer a {
+  color: #3b4446;
+}
+footer i {
+  cursor: pointer;
+}
+
+.card-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card-container .card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin: 5px;
+  max-width: 12em;
+  min-height: 17em;
+  background-color: #fff;
+}
+.card-container .card > * {
+  padding: 5px 0;
+}
+.card-container .card i {
+  color: gold;
+}
+.card-container .title {
+  text-align: center;
+}
+.card-container .price {
+  font-family: sans-serif;
+  font-weight: 500;
+  color: #166a8f;
+}
+
+.log-in {
+  position: absolute;
+  inset: 0;
+  min-height: 100vh;
+  background-color: #3b4446;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.log-in-container {
+  background-color: #fff;
+  height: 20em;
+  width: 40em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.log-in-container .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.log-in-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.log-in-container form > * {
+  margin: 5px 0;
+}
+.log-in-container form input {
+  padding: 10px 5px;
+}
+.log-in-container form button {
+  padding: 10px 77px;
+  background-color: #3b4446;
+  border-radius: 5px;
+  border: 0;
+  color: #aeb6b8;
+}
+.log-in-container form button:hover {
+  background-color: #525e61;
+}
+.log-in-container form button:active {
+  background-color: #166a8f;
 }
 
 /*# sourceMappingURL=style.css.map */

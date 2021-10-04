@@ -7,5 +7,10 @@
 @import "base/reset",
         "base/base";
 
-@import "layout/nav";
+@import "layout/nav",
+        "layout/main",
+        "layout/footer";
+
+@import "components/cardContainer",
+        "components/logInPage";
 

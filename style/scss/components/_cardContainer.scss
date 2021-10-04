@@ -1,0 +1,31 @@
+.card-container{
+    width: 90%;
+    margin: 0 auto;
+    @include flexy($disp: flex, $wrap: wrap, $just:center);
+
+    .card{
+        cursor: pointer;
+        @include flexy($disp:flex, $dir: column, $align: center, $just: center);
+        border-radius: 5px;
+        margin: 5px;
+        max-width: 12em;
+        min-height: 17em;
+        background-color: $white-background;
+        & > *{
+            padding: 5px 0;
+        }
+        i{
+            color: $font-color-9;
+        }
+    }
+
+    .title{
+        text-align: center;
+    }
+
+    .price{
+        font-family: sans-serif;
+        font-weight: 500;
+        color: $font-color-5;
+    }
+}

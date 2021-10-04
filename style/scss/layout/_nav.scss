@@ -1,7 +1,7 @@
 nav{
     grid-area: nav;
     @include flexy($disp: flex, $dir: row, $just: space-between, $align: center);
-    background-color: $primary-background;
+    background-color: $secondary-background;
     padding: 10px;
 
     h3{
