@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr);
+
+    font-family: $font-stack-primary;
+
+    @include mq("sm"){
+        grid-template-areas: "nav" "main" "footer";
+    }
+}
+
+a{
+    text-decoration: none;
+}

@@ -1,0 +1,25 @@
+nav{
+    grid-area: nav;
+    @include flexy($disp: flex, $dir: row, $just: space-between, $align: center);
+    background-color: $primary-background;
+    padding: 10px;
+
+    h3{
+        a{
+            color: $font-color-5;
+        }
+    }
+
+    .icons{
+        @include flexy($disp: flex, $dir: row, $just: space-between, $align: center);
+        div{
+            padding: 0 7px;
+            i{
+                cursor: pointer;
+                color: $font-color-4;
+            }
+        }
+    }
+
+    
+}
