@@ -459,7 +459,8 @@ footer i {
 .log-in-container {
   background-color: #fff;
   height: 20em;
-  width: 40em;
+  width: 17em;
+  border-radius: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -497,6 +498,13 @@ footer i {
 }
 .log-in-container form button:active {
   background-color: #166a8f;
+}
+
+@media (min-width: 768px) {
+  .log-in-container {
+    width: 50em;
+    height: 25em;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

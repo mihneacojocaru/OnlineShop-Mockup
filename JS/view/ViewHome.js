@@ -78,5 +78,4 @@ class ViewHome{
 }
 
 
-
 export default ViewHome;

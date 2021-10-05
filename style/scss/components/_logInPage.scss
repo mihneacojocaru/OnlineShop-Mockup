@@ -9,7 +9,8 @@
 .log-in-container{
     background-color: $white-background;
     height: 20em;
-    width: 40em;
+    width: 17em;
+    border-radius: 10px;
     position: relative;
     @include flexy($align:center,$just:space-around,$dir:column);
 
@@ -43,5 +44,14 @@
                 background-color: $font-color-5;
             }
         }
+    }
+
+}
+
+@include mq("md") {
+
+    .log-in-container{
+        width: 50em;
+        height: 25em;
     }
 }

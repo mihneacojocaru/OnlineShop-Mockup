@@ -11,7 +11,7 @@ console.log(x.returnProductObject("Produs 3"));
 
 let viewHome = new ViewHome();
 
-let nrOfCards = 4;
+let nrOfCards = 8;
 
 viewHome.setNumberOfCards(nrOfCards);
 
