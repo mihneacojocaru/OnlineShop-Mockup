@@ -10,6 +10,26 @@ class OrderDetails{
 
     }
 
+    returnOrderDetailsText = () => {
+
+        let text = "";
+
+        text += "Id: " + 
+                this.id +
+                "; Order id: " +
+                this.orderId + 
+                "; Product Id: " +
+                this.productId +
+                "; Price: " +
+                this.price; + 
+                "; Quantity:" +
+                this.quantity;
+
+        return text;
+
+    }
+
+
 }
 
 export default OrderDetails;

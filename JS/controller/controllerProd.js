@@ -79,7 +79,6 @@ class ControllerProducts{
      
         let obj=this.returnProductObject(name);
 
-
         //localStorage.removeItem(obj.id);
 
         obj.description=description;

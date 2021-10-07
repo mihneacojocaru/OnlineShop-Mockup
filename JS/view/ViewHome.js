@@ -2,6 +2,13 @@ class ViewHome{
 
     constructor(){
         this.container = document.querySelector(".container");
+
+        this.callMainPage();
+
+        this.loginPage();
+    }
+
+    callMainPage = (nrOfCards) => {
         this.container.innerHTML = "";
         this.nav = document.createElement('nav');
         this.container.appendChild(this.nav);
@@ -14,8 +21,11 @@ class ViewHome{
         this.footer = document.createElement('footer');
         this.container.appendChild(this.footer);
         this.setFooter();
-    }
 
+        this.setNumberOfCards(nrOfCards);
+
+    }
+    
     setNavBar = () => {
         const navbar = `<div class="logo">
                             <h3><a href="#">Online Shop</a></h3>
@@ -75,6 +85,42 @@ class ViewHome{
 
         this.footer.innerHTML += footer;
     }
+
+    setLogin = () => {
+        let loginPage = `<div class="log-in">
+                        <div class="log-in-container">
+                            <span class="close">x</span>
+                            <h2>Login</h2>
+                            <form>
+                                <input type="text" placeholder="Username">
+                                <input type="text" placeholder="Password">
+                                <button>Login</button>
+                            </form>
+                        </div>
+                    </div>`;
+
+        this.container.innerHTML = "";
+        this.container.innerHTML += loginPage;
+    }
+
+    loginPage(){
+
+        let user = document.addEventListener('click', e => {
+            e.preventDefault();
+            let obj = e.target;
+
+            if(obj.parentNode.className == "user"){
+                this.setLogin();
+            } else if (obj.className == "close"){
+                this.callMainPage(2);
+            }
+        });
+
+        return "";
+
+    }
+
+
 }
 
 

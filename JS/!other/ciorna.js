@@ -18,3 +18,9 @@ function createProduct(id){
     localStorage.setItem(product.id,JSON.stringify(product));
 }
 
+let customer = new Customers("user@email.com","1234","John Smith","123 Spooner Str.","321 MainBoulevard","USA", "+390123123123");
+
+let customer = new Customers("c2","user@example.com","0123","Jane Doe","123 First Str.","321 SecondBoulevard","Canada", "+290123123123");
+
+localStorage.setItem(customer.id,JSON.stringify(customer));
+

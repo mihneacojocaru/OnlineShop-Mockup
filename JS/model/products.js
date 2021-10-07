@@ -8,7 +8,7 @@ class Product {
         this.image = image;
     }
 
-    returnText = () => {
+    returnProductText = () => {
 
         let text = "";
 
