@@ -427,7 +427,7 @@ footer i {
   align-items: center;
   border-radius: 5px;
   margin: 5px;
-  max-width: 12em;
+  width: 15em;
   min-height: 17em;
   background-color: #fff;
 }
@@ -444,6 +444,11 @@ footer i {
   font-family: sans-serif;
   font-weight: 500;
   color: #166a8f;
+}
+
+.img img {
+  max-width: 150px;
+  height: auto;
 }
 
 .log-in {
@@ -505,6 +510,34 @@ footer i {
     width: 50em;
     height: 25em;
   }
+}
+.view--details {
+  background-color: white;
+}
+
+.go-back {
+  cursor: pointer;
+}
+
+.title {
+  margin: 30px;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 30px;
+}
+
+.prod-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.prod-info * {
+  margin: 10px 0;
 }
 
 /*# sourceMappingURL=style.css.map */

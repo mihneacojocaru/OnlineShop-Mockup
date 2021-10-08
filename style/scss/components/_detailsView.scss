@@ -1,0 +1,28 @@
+.view--details{
+    background-color: white;
+}
+
+.go-back{
+    cursor: pointer;
+}
+.title{
+    margin: 30px;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.details{
+    @include flexy($disp: flex,$align:center);
+    padding: 10px 0 30px;
+}
+
+.prod-info{
+    @include flexy($disp: flex,$dir:column,$just:center);
+    *{
+        margin: 10px 0;
+    }
+}
+
+.price{
+    
+}

@@ -9,10 +9,11 @@ import ControllerOrderDetails from "./JS/controller/controllerOrderDetails.js";
 import ControllerCustomers from "./JS/controller/controllerCustomers.js";
 import ViewHome from "./JS/view/ViewHome.js";
 
+import ViewDetails from "./JS/view/ViewDetails.js";
+
 
 let viewHome = new ViewHome();
 
-let nrOfCards = 2;
+//let viewDetails = new ViewDetails();
 
-viewHome.setNumberOfCards(nrOfCards);
 

@@ -8,7 +8,7 @@
         @include flexy($disp:flex, $dir: column, $align: center, $just: center);
         border-radius: 5px;
         margin: 5px;
-        max-width: 12em;
+        width: 15em;
         min-height: 17em;
         background-color: $white-background;
         & > *{
@@ -19,6 +19,8 @@
         }
     }
 
+    
+
     .title{
         text-align: center;
     }
@@ -27,5 +29,13 @@
         font-family: sans-serif;
         font-weight: 500;
         color: $font-color-5;
+    }
+}
+
+.img{
+    
+    img{
+        max-width: 150px;
+        height: auto;
     }
 }
