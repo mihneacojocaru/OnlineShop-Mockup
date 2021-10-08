@@ -67,3 +67,5 @@ class ControllerOrderDetails{
     }
 
 }
+
+export default ControllerOrderDetails;

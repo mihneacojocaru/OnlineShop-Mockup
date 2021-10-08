@@ -24,3 +24,28 @@ let customer = new Customers("c2","user@example.com","0123","Jane Doe","123 Firs
 
 localStorage.setItem(customer.id,JSON.stringify(customer));
 
+for(let i=1;i<6;i++){
+
+    let x = new Orders("o"+i,"CustId"+i,"10 Pc","Str. Street Nr."+i,"Address"+i,"email@example.com"+"20.12.2020","shipped");
+    
+    localStorage.setItem(x.id,JSON.stringify(x));
+
+}
+
+
+for(let i=1;i<6;i++){
+
+    let x = new Orders("od"+i,"OrdId"+i,"ProdId"+i,"100€","10Pc");
+    
+    localStorage.setItem(x.id,JSON.stringify(x));
+
+}
+
+
+for(let i=1;i<6;i++){
+
+    let x = new Customers("CstId"+i,"email@email.com","John Doe","Address"+i,"Shipping Address"+i,"USA","+3012312312"+i);
+    
+    localStorage.setItem(x.id,JSON.stringify(x));
+
+}
