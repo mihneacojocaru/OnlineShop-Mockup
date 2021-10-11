@@ -1,15 +1,18 @@
 import ControllerProducts from "../controller/controllerProd.js";
+import ViewHome from "./ViewHome.js";
 
 class ViewDetails{
 
-    constructor(objId){
+    constructor(){
 
         this.container = document.querySelector(".container");
 
         this.callDetailsPage();
 
         this.controllerProduct = new ControllerProducts;
+        this.products = this.controllerProduct.list;
 
+        console.log("view details");
     }
 
     callDetailsPage(){
@@ -41,7 +44,13 @@ class ViewDetails{
 
     setMain = () => {
         this.main.innerHTML = "";
+
+        
+        //let productList =  this.controllerProduct.list;
+
+
         this.main.innerHTML += this.createDetailView();
+        this.goBack();
     }
 
     setFooter = () => {
@@ -86,7 +95,43 @@ class ViewDetails{
         return detailView;
         
     }
+    createDetailView1(obj){
+        let detailView = `<div class="view--details">
+                            <span class="go-back">go back...</span>
+                            <div class="title">
+                                <p>${obj.description}</p>
+                            </div>
+                            <div class="details">
+                                <div class="prod-img">
+                                    <img style="width: 400px;" src="${obj.image}" alt="${obj.name}">
+                                </div>
+                                <div class="prod-info">
+                                    <p>${obj.name}</p>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="price"><p>${obj.price}</p></div>
+                                    <button>Add to cart</button>
+                                </div>
+                            </div>
+                            </div>`;
+        return detailView;
+        
+    }
 
+    goBack(){
+        let goBack = document.addEventListener("click", e => {
+            e.preventDefault();
+            let obj = e.target;
+            if(obj.classList.contains("go-back")){
+                new ViewHome;
+            }
+        });
+    }
 
 }
 

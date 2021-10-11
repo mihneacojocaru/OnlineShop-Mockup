@@ -1,4 +1,5 @@
 import ControllerProducts from "../controller/controllerProd.js";
+import ViewDetails from "./ViewDetails.js";
 
 class ViewHome{
 
@@ -12,6 +13,10 @@ class ViewHome{
         this.controllerProduct = new ControllerProducts;
 
         this.appendCardsToPage();
+
+        this.onCardClick();
+
+        console.log("view home");
 
 
     }
@@ -55,19 +60,19 @@ class ViewHome{
     }
 
     setCard = (obj) => {
-        const card = `<div class="card">
-        <div class="img"><img src="${obj.image}" alt="${obj.name}"></div>
-        <div class="title">
-            <p>${obj.name}</p>
+        const card = `<div class="card click">
+        <div class="img click"><img class="click" src="${obj.image}" alt="${obj.name}"></div>
+        <div class="title click">
+            <p class="click">${obj.name}</p>
         </div>
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
+        <div class="stars click">
+            <i class="fas fa-star click"></i>
+            <i class="fas fa-star click"></i>
+            <i class="fas fa-star click"></i>
+            <i class="fas fa-star click"></i>
+            <i class="fas fa-star click"></i>
         </div>
-        <div class="price"><span>${obj.price}</span></div>
+        <div class="price click"><span class="click">${obj.price}</span></div>
     </div>`;
 
         this.cardContainer.innerHTML += card;
@@ -123,11 +128,30 @@ class ViewHome{
                 this.setLogin();
             } else if (obj.className == "close"){
                 this.callMainPage();
+                this.appendCardsToPage();
+                this.onCardClick();
             }
         });
 
+        
+
         return "";
 
+    }
+
+    onCardClick(){
+        let card = document.addEventListener("click", e => {
+            e.preventDefault();
+            let obj = e.target;
+
+            if(obj.classList.contains("click")){
+                
+                new ViewDetails();
+                
+            }
+
+
+        });
     }
 
     /** OLD FUNCTIONS */
