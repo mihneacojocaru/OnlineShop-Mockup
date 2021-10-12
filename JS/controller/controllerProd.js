@@ -42,9 +42,8 @@ class ControllerProducts{
 
         for(let i=0; i<this.list.length; i++){
 
-            if(this.list[i].name == name){
-               
-                return this.list[i];
+            if(this.list[i].name == name){           
+               return this.list[i];
             }
 
         }

@@ -1,7 +1,7 @@
 import ControllerProducts from "../controller/controllerProd.js";
 import ViewDetails from "./ViewDetails.js";
 
-class ViewHome{
+export default class ViewHome{
 
     constructor(){
         this.container = document.querySelector(".container");
@@ -146,7 +146,8 @@ class ViewHome{
 
             if(obj.classList.contains("click")){
                 
-                new ViewDetails();
+                let viewDetails = new ViewDetails;
+                viewDetails.setMainDetails();
                 
             }
 
@@ -164,5 +165,3 @@ class ViewHome{
 
 }
 
-
-export default ViewHome;

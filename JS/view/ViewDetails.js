@@ -6,13 +6,14 @@ class ViewDetails{
     constructor(){
 
         this.container = document.querySelector(".container");
-
-        this.callDetailsPage();
-
-        this.controllerProduct = new ControllerProducts;
+        
+        this.controllerProduct = new ControllerProducts();
         this.products = this.controllerProduct.list;
-
-        console.log("view details");
+        
+        this.callDetailsPage();
+        
+        //this.productList();
+        //console.log("view details");
     }
 
     callDetailsPage(){
@@ -23,7 +24,7 @@ class ViewDetails{
 
         this.main = document.createElement('main');
         this.container.appendChild(this.main);
-        this.setMain();
+        //this.setMainDetails();
 
         this.footer = document.createElement('footer');
         this.container.appendChild(this.footer);
@@ -42,14 +43,14 @@ class ViewDetails{
         this.nav.innerHTML += navbar;
     }
 
-    setMain = () => {
+    setMainDetails = () => {
         this.main.innerHTML = "";
 
-        
-        //let productList =  this.controllerProduct.list;
+        this.products.forEach( e => {
+            this.main.innerHTML += this.createDetailViewNew(e);
+        });
 
-
-        this.main.innerHTML += this.createDetailView();
+        //this.main.innerHTML += this.createDetailView();
         this.goBack();
     }
 
@@ -95,7 +96,7 @@ class ViewDetails{
         return detailView;
         
     }
-    createDetailView1(obj){
+    createDetailViewNew(obj){
         let detailView = `<div class="view--details">
                             <span class="go-back">go back...</span>
                             <div class="title">
@@ -132,6 +133,13 @@ class ViewDetails{
             }
         });
     }
+
+    // productList(){
+    //     this.products.forEach( e => {
+    //         console.log(e.description,e.name,e.price,e.image);
+    //     })
+    // }
+
 
 }
 
