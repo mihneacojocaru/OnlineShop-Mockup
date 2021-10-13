@@ -5,18 +5,10 @@ export default class ViewHome{
 
     constructor(){
         this.container = document.querySelector(".container");
-
+        
+        this.controllerProduct = new ControllerProducts();
+        
         this.callMainPage();
-
-        this.loginPage();
-
-        this.controllerProduct = new ControllerProducts;
-
-        this.appendCardsToPage();
-
-        this.onCardClick();
-
-        console.log("view home");
 
 
     }
@@ -36,7 +28,10 @@ export default class ViewHome{
         this.setFooter();
 
         this.cardContainer = document.querySelector('.card-container');
+
+        this.appendCardsToPage();  
         
+        this.loginView();
 
     }
     
@@ -60,22 +55,31 @@ export default class ViewHome{
     }
 
     setCard = (obj) => {
-        const card = `<div class="card click">
-        <div class="img click"><img class="click" src="${obj.image}" alt="${obj.name}"></div>
-        <div class="title click">
-            <p class="click">${obj.name}</p>
-        </div>
-        <div class="stars click">
-            <i class="fas fa-star click"></i>
-            <i class="fas fa-star click"></i>
-            <i class="fas fa-star click"></i>
-            <i class="fas fa-star click"></i>
-            <i class="fas fa-star click"></i>
-        </div>
-        <div class="price click"><span class="click">${obj.price}</span></div>
-    </div>`;
+        const card = document.createElement('div');
+        card.className = "card click";
+        card.innerHTML=`
+                        <div class="img">
+                            <img src="${obj.image}" alt="${obj.name}">
+                        </div>
+                        <div class="title">
+                            <p>${obj.name}</p>
+                        </div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="price">
+                            <span>${obj.price}</span>
+                        </div>
+                    `;
 
-        this.cardContainer.innerHTML += card;
+        card.addEventListener("click", this.onCardClick);
+
+        this.cardContainer.appendChild(card);
+
     }
 
     appendCardsToPage = () => {
@@ -116,43 +120,42 @@ export default class ViewHome{
 
         this.container.innerHTML = "";
         this.container.innerHTML += loginPage;
-    }
 
-    loginPage(){
-
-        let user = document.addEventListener('click', e => {
-            e.preventDefault();
-            let obj = e.target;
-
-            if(obj.parentNode.className == "user"){
-                this.setLogin();
-            } else if (obj.className == "close"){
-                this.callMainPage();
-                this.appendCardsToPage();
-                this.onCardClick();
-            }
-        });
-
-        
-
-        return "";
+        let closeBtn = document.querySelector('.close');
+        closeBtn.addEventListener("click",this.callMainPage);
 
     }
 
-    onCardClick(){
-        let card = document.addEventListener("click", e => {
-            e.preventDefault();
-            let obj = e.target;
+    loginView = () => {
+        let userBtn = document.querySelector('.user');
+        userBtn.addEventListener("click",this.setLogin);     
+    }
 
-            if(obj.classList.contains("click")){
-                
-                let viewDetails = new ViewDetails;
-                viewDetails.setMainDetails();
-                
-            }
+    onCardClick =  e => {
+        let obj = e.target;
+        let productName = "";
+
+        if(obj.tagName == "DIV"){
+            productName = obj.children[1].children[0].textContent;
+            // console.log(productName);
+        } else if(obj.tagName == "IMG"){
+            productName = obj.parentNode.parentNode.children[1].children[0].textContent
+            // console.log(productName);
+        } else if(obj.tagName == "P"){
+            productName = obj.parentNode.parentNode.children[1].children[0].textContent
+            // console.log(productName);
+        } else if(obj.tagName == "I"){
+            productName = obj.parentNode.parentNode.children[1].children[0].textContent;
+            // console.log(productName);
+        } else if(obj.tagName == "SPAN"){
+            productName = obj.parentNode.parentNode.children[1].children[0].textContent;
+            // console.log(productName);
+        }
+
+        const clickedObj = this.controllerProduct.returnProductObject(productName);
 
 
-        });
+        new ViewDetails(clickedObj);
     }
 
     /** OLD FUNCTIONS */

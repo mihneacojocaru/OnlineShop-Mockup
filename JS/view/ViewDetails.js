@@ -3,17 +3,17 @@ import ViewHome from "./ViewHome.js";
 
 class ViewDetails{
 
-    constructor(){
+    constructor(obj){
 
         this.container = document.querySelector(".container");
         
         this.controllerProduct = new ControllerProducts();
         this.products = this.controllerProduct.list;
+
+        this.produs=obj;
         
         this.callDetailsPage();
-        
-        //this.productList();
-        //console.log("view details");
+
     }
 
     callDetailsPage(){
@@ -24,7 +24,7 @@ class ViewDetails{
 
         this.main = document.createElement('main');
         this.container.appendChild(this.main);
-        //this.setMainDetails();
+        this.setMainDetails();
 
         this.footer = document.createElement('footer');
         this.container.appendChild(this.footer);
@@ -46,12 +46,10 @@ class ViewDetails{
     setMainDetails = () => {
         this.main.innerHTML = "";
 
-        this.products.forEach( e => {
-            this.main.innerHTML += this.createDetailViewNew(e);
-        });
+        this.main.innerHTML += this.createDetailViewNew(this.produs);
 
-        //this.main.innerHTML += this.createDetailView();
-        this.goBack();
+        let btn = document.querySelector(".go-back");
+        btn.addEventListener("click",this.goBack);
     }
 
     setFooter = () => {
@@ -124,14 +122,12 @@ class ViewDetails{
         
     }
 
-    goBack(){
-        let goBack = document.addEventListener("click", e => {
-            e.preventDefault();
+    goBack = (e) => {
+        e.preventDefault();
             let obj = e.target;
             if(obj.classList.contains("go-back")){
                 new ViewHome;
             }
-        });
     }
 
     // productList(){
