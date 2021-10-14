@@ -4,12 +4,12 @@ import ViewDetails from "./ViewDetails.js";
 export default class ViewHome{
 
     constructor(){
+
         this.container = document.querySelector(".container");
         
         this.controllerProduct = new ControllerProducts();
         
         this.callMainPage();
-
 
     }
 
@@ -137,23 +137,17 @@ export default class ViewHome{
 
         if(obj.tagName == "DIV"){
             productName = obj.children[1].children[0].textContent;
-            // console.log(productName);
         } else if(obj.tagName == "IMG"){
-            productName = obj.parentNode.parentNode.children[1].children[0].textContent
-            // console.log(productName);
+            productName = obj.parentNode.parentNode.children[1].children[0].textContent;
         } else if(obj.tagName == "P"){
             productName = obj.parentNode.parentNode.children[1].children[0].textContent
-            // console.log(productName);
         } else if(obj.tagName == "I"){
             productName = obj.parentNode.parentNode.children[1].children[0].textContent;
-            // console.log(productName);
         } else if(obj.tagName == "SPAN"){
             productName = obj.parentNode.parentNode.children[1].children[0].textContent;
-            // console.log(productName);
         }
 
         const clickedObj = this.controllerProduct.returnProductObject(productName);
-
 
         new ViewDetails(clickedObj);
     }
