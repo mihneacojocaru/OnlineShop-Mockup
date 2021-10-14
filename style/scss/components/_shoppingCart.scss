@@ -1,0 +1,126 @@
+.shopping--cart{
+
+    .top--section{
+        padding: 5px;
+        span{
+            cursor: pointer;
+            &:active{
+                color: $font-color-5;
+            }
+        }
+    }
+
+    .bottom--section{
+        
+        @include flexy($align: center, $dir: column-reverse);
+        
+        .your--cart{
+            margin: 5px 20px;
+            
+            width: 95%;
+
+            .cart-title{
+                background-color: $font-color-2;
+                border-radius: 5px;
+                padding: 10px;
+                color: white;           
+                span{
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+            }
+
+            .cart--container{
+                @include flexy($dir: column);
+                .cart--element{
+                    border-bottom: 1px solid $font-color-2;
+                    padding: 10px;
+                    @include flexy();
+                    .product--image{
+                        width: 30%;
+                        img{
+                            width: 100px;
+                            height: auto;
+                        }
+                    }
+                    .product--info{
+                        width: 70%;
+                        min-height: 4.5em;
+                        @include flexy($just:space-between);
+                        .info--subcontainer{
+                            @include flexy($dir:column, $just:space-between);
+                            .button--elements{
+                                input{
+                                    width: 50px;
+                                }
+                            }
+                        }
+                        .price{
+                            span{
+                                color: $font-color-5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .summary--container{
+            margin: 5px 20px;
+            width: 70%;
+            max-width: 30em;
+            background-color: $font-color-4;
+            color: white;
+            border-radius: 5px;
+            .summary{
+                padding: 40px 0;
+                &--top{
+                    padding: 10px;
+                    background-color: $font-color-2;
+                    border-radius: 5px 5px 0 0;
+                    h3{
+                        text-transform: uppercase;
+                    }
+                }
+                &--middle{
+                    padding: 20px 10px;
+                    .two-elements{
+                        @include flexy($just:space-between);
+                        margin: 35px 0;
+                    }
+                    .total{
+                        border-top: 1px solid $font-color-1;
+                        padding: 20px 0 0 0;
+
+                        h5:nth-child(2){
+                            font-size: 20px;
+                        }
+                    }
+                }
+                &--bottom{
+                    margin: 0 10px;
+                    button{
+                        width: 100%;
+                        height: 30px;
+                    }
+                }
+            }
+            
+        }
+    }
+
+    @include mq("md"){
+        .bottom--section{
+            @include flexy($dir: row, $align: flex-start, $just: space-around);
+        
+            .your--cart{
+                max-width: 50%;
+            }
+            .summary--container{
+                max-width: 30%;
+            }
+        }
+
+    }
+}
+

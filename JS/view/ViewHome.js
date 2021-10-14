@@ -1,5 +1,6 @@
 import ControllerProducts from "../controller/controllerProd.js";
 import ViewDetails from "./ViewDetails.js";
+import ViewCart from "./ViewCart.js";
 
 export default class ViewHome{
 
@@ -32,6 +33,10 @@ export default class ViewHome{
         this.appendCardsToPage();  
         
         this.loginView();
+
+        this.shoppingCart = document.querySelector('.shopping-cart');
+        this.shoppingCart.addEventListener("click",this.onShoppingCartClick);
+
 
     }
     
@@ -150,6 +155,10 @@ export default class ViewHome{
         const clickedObj = this.controllerProduct.returnProductObject(productName);
 
         new ViewDetails(clickedObj);
+    }
+
+    onShoppingCartClick = () => {
+        new ViewCart();
     }
 
     /** OLD FUNCTIONS */
