@@ -12,6 +12,8 @@ export default class ViewHome{
         
         this.callMainPage();
 
+        this.onHomePageClick();
+
     }
 
     callMainPage = () => {
@@ -42,7 +44,7 @@ export default class ViewHome{
     
     setNavBar = () => {
         const navbar = `<div class="logo">
-                            <h3><a href="#">Online Shop</a></h3>
+                            <h3><a id="homePage" href="#">Online Shop</a></h3>
                         </div>
                         <div class="icons">
                             <div class="user"><i class="fas fa-user"> User</i></div>
@@ -134,6 +136,14 @@ export default class ViewHome{
     loginView = () => {
         let userBtn = document.querySelector('.user');
         userBtn.addEventListener("click",this.setLogin);     
+    }
+
+    onHomePageClick = () => {
+        let homePage = document.getElementById('homePage');
+        homePage.addEventListener("click", () => {
+            this.callMainPage();
+            console.log("TEST Home");
+        })
     }
 
     onCardClick =  e => {

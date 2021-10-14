@@ -13,7 +13,7 @@ export default class ViewCart{
         this.main.appendChild(this.cart);
 
         this.goBack();
-
+        this.onHomePageClick();
 
     }
 
@@ -100,6 +100,14 @@ export default class ViewCart{
         let continueShopping = document.getElementById("continueShopping");
         continueShopping.addEventListener("click", () => {
             new ViewHome();
+        })
+    }
+
+    onHomePageClick = () => {
+        let homePage = document.getElementById('homePage');
+        homePage.addEventListener("click", () => {
+            new ViewHome();
+            console.log("TEST Cart");
         })
     }
 

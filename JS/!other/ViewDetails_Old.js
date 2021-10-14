@@ -1,7 +1,7 @@
 import ControllerProducts from "../controller/controllerProd.js";
-import ViewHome from "./ViewHome.js";
+import ViewHome from "../view/ViewHome.js";
 
-export default class ViewDetails{
+class ViewDetails{
 
     constructor(obj){
 
@@ -13,11 +13,26 @@ export default class ViewDetails{
 
         this.produs=obj;
         
-        this.main = document.querySelector('main');
-
-        this.setMainDetails();
+        this.callDetailsPage();
 
     }
+
+    callDetailsPage(){
+        this.container.innerHTML = "";
+        this.nav = document.createElement('nav');
+        this.container.appendChild(this.nav);
+        this.setNavBar();
+
+        this.main = document.createElement('main');
+        this.container.appendChild(this.main);
+        this.setMainDetails();
+
+        this.footer = document.createElement('footer');
+        this.container.appendChild(this.footer);
+        this.setFooter();
+    }
+
+    
 
     setMainDetails = () => {
         this.main.innerHTML = "";
@@ -26,10 +41,9 @@ export default class ViewDetails{
 
         let btn = document.querySelector(".go-back");
         btn.addEventListener("click",this.goBack);
-        let homePage = document.querySelector('#homePage');
-        homePage.addEventListener("click", this.goBack);
-        
     }
+
+    
     
     createDetailView(obj){
         let detailView = `<div class="view--details">
@@ -64,8 +78,9 @@ export default class ViewDetails{
             let obj = e.target;
             if(obj.classList.contains("go-back")){
                 new ViewHome;
-                console.log("Test Details")
             }
     }
 
 }
+
+export default ViewDetails;
