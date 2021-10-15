@@ -58,6 +58,12 @@ class ControllerCustomers{
         localStorage.removeItem(id);
     }
 
+    nextCustomer(){
+        if(this.list.length==0){
+            return "c1";
+        }
+       return this.list[this.list.length-1].id+1;
+    }
 }
 
 export default ControllerCustomers;

@@ -1,20 +1,49 @@
+import ControllerCustomers from "../controller/controllerCustomers.js";
 import ControllerProducts from "../controller/controllerProd.js";
+import ControllerOrders from "../controller/controllerOrders.js";
+
+import Customers from "../model/customers.js";
+import Orders from "../model/orders.js"
+
 import ViewDetails from "./ViewDetails.js";
 import ViewCart from "./ViewCart.js";
+
 
 export default class ViewHome{
 
     constructor(){
 
-        this.container = document.querySelector(".container");
-        
+        this.customer = new Customers("c1234","john.doe@example.com","password","John Doe","First Street 123","Second Street 321","USA","+900123123123");
+
+        this.customer.returnCustomersText();
+
+        this.controllerCustomers = new ControllerCustomers();
+
+        this.controllerOrders = new ControllerOrders();
+
         this.controllerProduct = new ControllerProducts();
+        
+        this.container = document.querySelector(".container");
         
         this.callMainPage();
 
-        this.onHomePageClick();
+        //id,customer_id,ammount,shipping_address,order_address,order_email,order_date,order_status
+        this.order = new Orders(  
+            this.controllerOrders.nextOrder(),
+            this.customer.id,
+            0,
+            this.customer.default_shipping_address,
+            this.customer.billing_address,
+            "15-10-21",
+            "unconfirmed"
+        );
 
+        this.controllerOrders.addNewOrder(this.order);
+
+        
     }
+
+
 
     callMainPage = () => {
         this.container.innerHTML = "";
@@ -138,14 +167,6 @@ export default class ViewHome{
         userBtn.addEventListener("click",this.setLogin);     
     }
 
-    onHomePageClick = () => {
-        let homePage = document.getElementById('homePage');
-        homePage.addEventListener("click", () => {
-            this.callMainPage();
-            console.log("TEST Home");
-        })
-    }
-
     onCardClick =  e => {
         let obj = e.target;
         let productName = "";
@@ -164,7 +185,7 @@ export default class ViewHome{
 
         const clickedObj = this.controllerProduct.returnProductObject(productName);
 
-        new ViewDetails(clickedObj);
+        new ViewDetails(clickedObj,this.order);
     }
 
     onShoppingCartClick = () => {

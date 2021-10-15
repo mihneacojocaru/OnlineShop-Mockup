@@ -1,21 +1,35 @@
+import OrderDetails from "../model/orderDetails.js";
+
+import ControllerOrderDetails from "../controller/controllerOrderDetails.js";
 import ControllerProducts from "../controller/controllerProd.js";
+import ControllerOrders from "../controller/controllerOrders.js";
+
+
 import ViewHome from "./ViewHome.js";
 
 export default class ViewDetails{
 
-    constructor(obj){
+    constructor(obj ,order){
 
         this.container = document.querySelector(".container");
         
+        this.controllerOrderDetails = new ControllerOrderDetails();
+
         this.controllerProduct = new ControllerProducts();
 
         this.products = this.controllerProduct.list;
 
         this.produs=obj;
+        this.order=order;
         
         this.main = document.querySelector('main');
 
         this.setMainDetails();
+
+
+        this.addToCart = document.getElementById('addToCart');
+        this.addToCart.addEventListener("click",this.newOrderDetails);
+
 
     }
 
@@ -26,8 +40,6 @@ export default class ViewDetails{
 
         let btn = document.querySelector(".go-back");
         btn.addEventListener("click",this.goBack);
-        let homePage = document.querySelector('#homePage');
-        homePage.addEventListener("click", this.goBack);
         
     }
     
@@ -51,7 +63,7 @@ export default class ViewDetails{
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <div class="price"><p>${obj.price}</p></div>
-                                    <button>Add to cart</button>
+                                    <button id="addToCart">Add to cart</button>
                                 </div>
                             </div>
                             </div>`;
@@ -64,8 +76,34 @@ export default class ViewDetails{
             let obj = e.target;
             if(obj.classList.contains("go-back")){
                 new ViewHome;
-                console.log("Test Details")
             }
+    }
+
+    onAddToCart = () => {    
+        
+    }
+
+    newOrderDetails = () => {
+
+        //id,orderId,productId,price,quantity
+
+        this.details = new OrderDetails(
+            this.controllerOrderDetails.nextOrderDetails,
+            this.order.id,
+            this.produs.id,
+            this.produs.price,
+            1
+        );
+
+        console.log(this.details);
+        
+       // this.controllerOrderDetails.addNewOrderDetails(this.details);
+
+        
+        alert("adaugat cu succes");
+
+
+        
     }
 
 }

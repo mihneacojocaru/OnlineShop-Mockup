@@ -1,8 +1,9 @@
 import ViewHome from "./ViewHome.js";
 
+
 export default class ViewCart{
 
-    constructor(){
+    constructor(order){
 
         this.main = document.querySelector('main');
         this.main.innerHTML = "";
@@ -13,7 +14,6 @@ export default class ViewCart{
         this.main.appendChild(this.cart);
 
         this.goBack();
-        this.onHomePageClick();
 
     }
 
@@ -38,26 +38,7 @@ export default class ViewCart{
                             <span>Description</span>
                             <div class="button--elements">
                                 <label>Quantity</label>
-                                <input type="number" min="0" max="1000">
-                                <button>Remove</button>
-                            </div>
-                        </div>
-                        <div class="price">
-                            <span>100€</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="cart--element">
-                    <div class="product--image">
-                        <img src="https://s13emagst.akamaized.net/products/20507/20506551/images/res_76761b3617cbb5c268a0b62319565011.jpg?width=450&height=450&hash=E5C7983230CE05E06DEF75CF697390BF" alt="product">
-                    </div>
-                    <div class="product--info">
-                        <div class="info--subcontainer">
-                            <p>Masina Electrica Gazon</p>
-                            <span>Description</span>
-                            <div class="button--elements">
-                                <label>Quantity</label>
-                                <input type="number" min="0" max="1000">
+                                <input id="itemQuantity" type="number" min="0" max="1000">
                                 <button>Remove</button>
                             </div>
                         </div>
@@ -96,18 +77,34 @@ export default class ViewCart{
         this.cart.innerHTML += myContent;
     }
 
+    cartElement = (obj) => {
+        let element = `
+        <div class="cart--element">
+        <div class="product--image">
+            <img src="${obj.image}" alt="product">
+        </div>
+        <div class="product--info">
+            <div class="info--subcontainer">
+                <p>${obj.name}</p>
+                <span>Description</span>
+                <div class="button--elements">
+                    <label>Quantity</label>
+                    <input id="itemQuantity" type="number" min="0" max="1000">
+                    <button>Remove</button>
+                </div>
+            </div>
+            <div class="price">
+                <span>${obj.price}/span>
+            </div>
+        </div>
+    </div>
+        `;
+    }
+
     goBack = () => {
         let continueShopping = document.getElementById("continueShopping");
         continueShopping.addEventListener("click", () => {
             new ViewHome();
-        })
-    }
-
-    onHomePageClick = () => {
-        let homePage = document.getElementById('homePage');
-        homePage.addEventListener("click", () => {
-            new ViewHome();
-            console.log("TEST Cart");
         })
     }
 

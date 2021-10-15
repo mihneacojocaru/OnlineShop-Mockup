@@ -66,6 +66,19 @@ class ControllerOrders{
         localStorage.removeItem(id);
     }
 
+
+    nextOrder(){
+        if(this.list.length==0){
+            return "o1";
+        }
+       return this.list[this.list.length-1].id+1;
+    }
+
+    addNewOrder(order){
+
+        localStorage.setItem(order.id, JSON.stringify(order));
+
+    }
 }
 
 export default ControllerOrders;
