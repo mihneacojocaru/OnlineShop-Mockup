@@ -8,27 +8,30 @@ class ControllerOrderDetails{
 
         this.read();
 
+        this.orderDetailsRead();
+
+
     }
 
     read = () => {
 
         this.list = [];
 
-        for(let i=0; i<localStorage.length; i++){
+        // for(let i=0; i<localStorage.length; i++){
 
-            let obj = localStorage.getItem(localStorage.key(i));
+        //     let obj = localStorage.getItem(localStorage.key(i));
 
-            obj = JSON.parse(obj);
+        //     obj = JSON.parse(obj);
 
-            if(obj.id.includes("od")){
+        //     if(obj.id.includes("od")){
 
-                let orderDetails = new OrderDetails(obj.id,obj.orderId,obj.productId,obj.price,obj.quantity);
+        //         let orderDetails = new OrderDetails(obj.id,obj.orderId,obj.productId,obj.price,obj.quantity);
 
-                this.list.push(orderDetails);
+        //         this.list.push(orderDetails);
 
-            }
+        //     }
 
-        }
+        // }
 
     }
 
@@ -66,11 +69,14 @@ class ControllerOrderDetails{
         localStorage.removeItem(id);
     }
 
-    nextOrderDetails(){
+    nextOrderDetails = () => {
+
+        this.read();
+
         if(this.list.length==0){
             return "od1";
         }
-       return this.list[this.list.length-1].id+1;
+       return this.list[0].id+1;
     }
 
     addNewOrderDetails(order){
@@ -78,6 +84,36 @@ class ControllerOrderDetails{
         localStorage.setItem(order.id, JSON.stringify(order));
 
     }
+
+
+    orderDetailsRead = (orderId) => {
+
+        for (let item of this.list){
+            console.log(item);
+            // if(orderId == item.orderId){
+            //     console.log("aici");
+            // }
+        }
+    }
+
+    newOrderDetailsLocalStorage = () => {
+
+        let lista = [];
+
+        let od1 = new OrderDetails("od1","o1","p1","50€","1");
+        let od2 = new OrderDetails("od2","o2","p2","80€","1");
+        let od3 = new OrderDetails("od3","o3","p3","60€","1");
+
+        lista.push(od1);
+        lista.push(od2);
+        lista.push(od3);
+
+        localStorage.setItem("OrderDetailsDB", JSON.stringify(lista));
+
+
+    }
+
+
 
 }
 

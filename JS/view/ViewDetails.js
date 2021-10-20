@@ -28,6 +28,7 @@ export default class ViewDetails{
 
 
         this.addToCart = document.getElementById('addToCart');
+        
         this.addToCart.addEventListener("click",this.newOrderDetails);
 
 
@@ -88,7 +89,7 @@ export default class ViewDetails{
         //id,orderId,productId,price,quantity
 
         this.details = new OrderDetails(
-            this.controllerOrderDetails.nextOrderDetails,
+            this.controllerOrderDetails.nextOrderDetails(),
             this.order.id,
             this.produs.id,
             this.produs.price,
@@ -97,7 +98,7 @@ export default class ViewDetails{
 
         console.log(this.details);
         
-       // this.controllerOrderDetails.addNewOrderDetails(this.details);
+       this.controllerOrderDetails.addNewOrderDetails(this.details);
 
         
         alert("adaugat cu succes");

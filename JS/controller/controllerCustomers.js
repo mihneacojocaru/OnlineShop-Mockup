@@ -11,22 +11,22 @@ class ControllerCustomers{
 
         this.list = [];
 
-        for(let i=0; i<localStorage.length; i++){
+        // for(let i=0; i<localStorage.length; i++){
 
-            let obj = localStorage.getItem(localStorage.key(i));
+        //     let obj = localStorage.getItem(localStorage.key(i));
 
-            obj = JSON.parse(obj);
+        //     obj = JSON.parse(obj);
 
-            if(obj.id.includes("c")){
+        //     if(obj.id.includes("c")){
 
-                let customer = new Customers(obj.id,obj.email,obj.password,obj.full_name,obj.billing_address,obj.default_shipping_address,obj.country,obj.phone);
+        //         let customer = new Customers(obj.id,obj.email,obj.password,obj.full_name,obj.billing_address,obj.default_shipping_address,obj.country,obj.phone);
 
-                this.list.push(customer);
+        //         this.list.push(customer);
 
 
-            }
+        //     }
 
-        }
+        // }
 
     };
 

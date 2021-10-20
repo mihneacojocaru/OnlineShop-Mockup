@@ -38,7 +38,7 @@ export default class ViewHome{
             "unconfirmed"
         );
 
-        this.controllerOrders.addNewOrder(this.order);
+        //this.controllerOrders.addNewOrder(this.order);
 
         
     }
