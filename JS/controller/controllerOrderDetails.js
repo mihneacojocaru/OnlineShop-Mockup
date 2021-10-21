@@ -8,8 +8,6 @@ class ControllerOrderDetails{
 
         this.read();
 
-        this.orderDetailsRead();
-
 
     }
 
@@ -17,21 +15,13 @@ class ControllerOrderDetails{
 
         this.list = [];
 
-        // for(let i=0; i<localStorage.length; i++){
+        let storage = JSON.parse(localStorage.getItem("OrderDetailsDB"));
 
-        //     let obj = localStorage.getItem(localStorage.key(i));
+        for(let item of storage){
+            this.list.push(item);
+        }
 
-        //     obj = JSON.parse(obj);
-
-        //     if(obj.id.includes("od")){
-
-        //         let orderDetails = new OrderDetails(obj.id,obj.orderId,obj.productId,obj.price,obj.quantity);
-
-        //         this.list.push(orderDetails);
-
-        //     }
-
-        // }
+        console.log(this.list);
 
     }
 

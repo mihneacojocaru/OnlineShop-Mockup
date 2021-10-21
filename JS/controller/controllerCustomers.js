@@ -11,59 +11,128 @@ class ControllerCustomers{
 
         this.list = [];
 
-        // for(let i=0; i<localStorage.length; i++){
+        let storage = JSON.parse(localStorage.getItem("CustomersDB"));
 
-        //     let obj = localStorage.getItem(localStorage.key(i));
-
-        //     obj = JSON.parse(obj);
-
-        //     if(obj.id.includes("c")){
-
-        //         let customer = new Customers(obj.id,obj.email,obj.password,obj.full_name,obj.billing_address,obj.default_shipping_address,obj.country,obj.phone);
-
-        //         this.list.push(customer);
-
-
-        //     }
-
-        // }
-
+        for(let item of storage){
+            this.list.push(item);
+        }
     };
 
-    printToConsole(){
+    nextCustomerId = () => {
+        let storage = JSON.parse(localStorage.getItem("CustomersDB"));
+        
+        let nrList = [];
 
-        this.list.forEach(e => {
-            console.log(e.returnCustomersText());
-        })
+        for(let item of storage){
+            let nr = item.id.split("c")[1];
+            nr = parseInt(nr);
+            nrList.push(nr);
+        }
 
+        let nrMax = Math.max(...nrList);
+        nrMax += 1;
+        let newId = "c" + nrMax;
+        return newId;
     }
 
-    returnCustomerObject(id){
-        for(let i=0;i<this.list.length; i++){
-            if(this.list[i].id == id){
-                return this.list[i];
+    returnCustomerObject = (id) => {
+        
+        for( let item of this.list){
+            if(item.id == id){
+                return item;
             }
         }
     }
 
-    updateDefaultShippingAddress(id,address){
-        let obj = this.returnCustomerObject(id);
+    addNewCustomer = (email,password,fullName,billAdd,shippAdd,country,phone) => {
+        let list = [];
 
-        obj.default_shipping_address = address;
+        let newCustomer = new Customers(
+            this.nextCustomerId(),
+            email,
+            password,
+            fullName,
+            billAdd,
+            shippAdd,
+            country,
+            phone 
+        );
 
-        localStorage.setItem(obj.id, JSON.stringify(obj));
-    }
+        newCustomer = JSON.parse(JSON.stringify(newCustomer));
 
-    deleteItem(id){
-        localStorage.removeItem(id);
-    }
+        let storage = JSON.parse(localStorage.getItem("CustomersDB"));
 
-    nextCustomer(){
-        if(this.list.length==0){
-            return "c1";
+        if(storage){
+            for(let item of storage){
+                list.push(item);
+            }
         }
-       return this.list[this.list.length-1].id+1;
+        
+        list.push(newCustomer);
+
+        //localStorage.setItem("CustomersDB",JSON.stringify(list));
+         console.log("ModifyLocalStorage is inactive in controllerCustomer -> addNewCustomer")
+         console.log(list);
     }
+
+    updatePass = (id,newPassword) => {
+
+        let storage = JSON.parse(localStorage.getItem("CustomersDB"));
+
+        let list = [];
+        
+        for(let item of storage){
+            if(item.id !== id){
+                list.push(item);
+            }else{
+                item.password = newPassword;
+                list.push(item);
+            }
+        }
+
+        localStorage.setItem("CustomersDB",JSON.stringify(list));
+        
+
+    }
+
+    updateShippingAddress = (id,newAddress) => {
+
+        let storage = JSON.parse(localStorage.getItem("CustomersDB"));
+
+        let list = [];
+        
+        for(let item of storage){
+            if(item.id !== id){
+                list.push(item);
+            }else{
+                item.default_shipping_address = newAddress;
+                list.push(item);
+            }
+        }
+
+        localStorage.setItem("CustomersDB",JSON.stringify(list));
+        
+
+    }  
+
+    deleteCustomer = (id) => {
+        
+        let list = [];
+
+        let storage = JSON.parse(localStorage.getItem("CustomersDB"));
+
+        if(storage){
+            for(let item of storage){
+                if(item.id !== id){
+                    list.push(item);
+                }
+            }
+        }
+
+        localStorage.setItem("CustomersDB", JSON.stringify(list));
+    }  
+
+    
 }
 
 export default ControllerCustomers;

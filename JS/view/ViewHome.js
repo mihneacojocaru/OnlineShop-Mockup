@@ -26,24 +26,11 @@ export default class ViewHome{
         this.container = document.querySelector(".container");
         
         this.callMainPage();
-
-        //id,customer_id,ammount,shipping_address,order_address,order_email,order_date,order_status
-        this.order = new Orders(  
-            this.controllerOrders.nextOrder(),
-            this.customer.id,
-            0,
-            this.customer.default_shipping_address,
-            this.customer.billing_address,
-            "15-10-21",
-            "unconfirmed"
-        );
-
-        //this.controllerOrders.addNewOrder(this.order);
-
         
     }
 
 
+    //+++ Frontend Functions
 
     callMainPage = () => {
         this.container.innerHTML = "";
@@ -83,7 +70,7 @@ export default class ViewHome{
         this.nav.innerHTML += navbar;
     }
 
-    setMain = (title="Articole Gradinarit") => {
+    setMain = (title="School supplies") => {
         const h2 = `<h2>${title}</h2>`;
         const cardContainer = `<div class="card-container"></div>`;
         this.main.innerHTML += h2;
@@ -108,7 +95,7 @@ export default class ViewHome{
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="price">
-                            <span>${obj.price}</span>
+                            <span>${obj.price}€</span>
                         </div>
                     `;
 
@@ -192,13 +179,20 @@ export default class ViewHome{
         new ViewCart();
     }
 
-    /** OLD FUNCTIONS */
+    //+++ Backend Functions
 
-    // setNumberOfCards = (numb) => {
-    //     for(let i=1; i<=numb; i++){
-    //         this.setCard();
-    //     }
-    // }
+    //** Add New Order Based on current customer
+    addOrder = (currentCustomer) => {
+        this.controllerOrders.addNewOrder(
+            this.controllerOrders.nextOrderId(),
+            this.controllerCustomers.returnCustomerObject(currentCustomer).id,
+            0,
+            this.controllerCustomers.returnCustomerObject(currentCustomer).default_shipping_address,
+            this.controllerCustomers.returnCustomerObject(currentCustomer).billing_address,
+            this.controllerCustomers.returnCustomerObject(currentCustomer).email,
+            "in processing"
+        );
+    }
 
 }
 

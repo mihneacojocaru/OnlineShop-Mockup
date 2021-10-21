@@ -29,7 +29,7 @@ export default class ViewDetails{
 
         this.addToCart = document.getElementById('addToCart');
         
-        this.addToCart.addEventListener("click",this.newOrderDetails);
+        //this.addToCart.addEventListener("click",this.newOrderDetails);
 
 
     }
@@ -63,7 +63,7 @@ export default class ViewDetails{
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <div class="price"><p>${obj.price}</p></div>
+                                    <div class="price"><p>${obj.price}€</p></div>
                                     <button id="addToCart">Add to cart</button>
                                 </div>
                             </div>

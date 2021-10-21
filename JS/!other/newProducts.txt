@@ -1,0 +1,47 @@
+//+++ Product 1:
+
+id: p1 
+name: Collegeblock DIN A4
+price: 2€
+description: Lineatur 27- liniert, Schulblock DIN a4 liniert, 80 Blatt, gelocht und perforiert
+image: https://www.rofu.de/out/pictures/generated/product/1/665_665_98/20238834_155203(1).jpg
+
+//+++ Product 2:
+
+id: p2
+name: Schlampermäppchen aus Leder
+price: 10€
+description: Schlamperrolle aus echtem Leder in schwarz von Stylex, Maße: ca. 20 x 5 cm (LxØ), ohne Inhalt
+image: https://www.rofu.de/out/pictures/generated/product/1/665_665_98/42475.jpg
+
+//+++ Product 3:
+
+id: p3
+name:Lamy Füllhalter nexx Feder A
+price: 20€
+description: Bei einem Lamy Füllhalter passt sich die Feder der Handschrift an und nicht anders herum. Der LAMY Nexx ist speziell für Jugendliche entworfen.
+image: https://www.rofu.de/out/pictures/generated/product/1/665_665_98/125274_group.jpg
+
+//+++ Product 4:
+
+id: p4
+name: MICA - Rucksack - in dunkelgrau/grau
+price: 30€
+description: Praktischer Rucksack in grau, mit Laptopfach, Frontreißverschluss und Rückenpolster, Maße: ca. 31 x 48 x 19 cm.
+image: https://www.rofu.de/out/pictures/generated/product/1/665_665_98/227599_4016096406554_mica_rucksack_03.jpg
+
+//+++ Product 5:
+
+id: p5
+name: Deckfarbkasten K12
+price: 9€
+description:Deckfarbkasten für Schule und Freizeit. Jetzt im neu entwickelten, exklusiven Design. Der gute Farbkasten von Pelikan mit 12 Farben.
+image: https://www.rofu.de/out/pictures/generated/product/1/665_665_98/720250_012009_k12_neu_2_4100_klein.jpg
+
+//+++ Product 6:
+
+id: p6
+name: Kinderschere - abgerundet 
+price: 1€
+description: Bastelschere für Kinder ab 5 Jahren, mit gehärteten, abgerundeten Stahlklingen und ergonomischem Griff. Schneidet leicht und präzise Papier, Pappe, Klebeband und andere Materialien. Für Linkshänder. In zwei verschiedenen Ausführungen.
+image: https://www.rofu.de/out/pictures/generated/product/1/665_665_98/4016096344870_207428_titel.jpg

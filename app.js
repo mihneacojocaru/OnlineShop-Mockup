@@ -11,9 +11,13 @@ import ControllerCustomers from "./JS/controller/controllerCustomers.js";
 
 import ViewHome from "./JS/view/ViewHome.js";
 import ViewDetails from "./JS/view/ViewDetails.js";
+import TESTING from "./JS/view/testFunctions.js";
 
 
 let viewHome = new ViewHome();
+
+
+
 
 
 

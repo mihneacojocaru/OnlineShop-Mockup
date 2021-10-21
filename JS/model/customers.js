@@ -24,7 +24,7 @@ class Customers{
                 "Country: " + this.country + "\n" +
                 "Phone: " + this.phone + "\n";
 
-        console.log(text);
+        //console.log(text);
         return text;
 
     }

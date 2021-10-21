@@ -9,30 +9,70 @@ class ControllerOrders{
 
         this.read();
 
-
     }
 
     read = () => {
 
         this.list = [];
 
-        // for(let i=0; i<localStorage.length; i++){
+        let storage = JSON.parse(localStorage.getItem("OrdersDB"));
 
-        //     let obj = localStorage.getItem(localStorage.key(i));
+        if(storage){
+            for(let item of storage){
+                this.list.push(item);
+            }
+        }
+    }
+    nextOrderId = () => {
+        let storage = JSON.parse(localStorage.getItem("OrdersDB"));
+        
+        if(storage){
+            let nrList = [];
 
-        //     obj = JSON.parse(obj);
+            for(let item of storage){
+                let nr = item.id.split("o")[1];
+                nr = parseInt(nr);
+                nrList.push(nr);
+            }
 
-        //     if(obj.id.includes("o")){
-
-        //         let order = new Orders(obj.id,obj.customer_id,obj.ammount,obj.shipping_address,obj.order_address,obj.order_email,obj.order_date,obj.order_status);
-                
-        //         this.list.push(order);
-
-        //     }
-
-        // }
+            let nrMax = Math.max(...nrList);
+            nrMax += 1;
+            let newId = "o" + nrMax;
+            return newId;
+        }else{
+            return "o1";
+        }
+        
     }
 
+    addNewOrder(id,clientId,nrOfOrders=0,shippAdd,orderAdd,email,status){
+        let list = [];
+
+        let newDate = new Date().toISOString().substring(0,10);
+
+        let order = new Orders(id,clientId,nrOfOrders,shippAdd,orderAdd,email,newDate,status);
+
+        order = JSON.parse(JSON.stringify(order));
+
+        let storage = JSON.parse(localStorage.getItem("OrdersDB"));
+
+        if(storage){
+            for(let item of storage){
+                list.push(item);
+            }
+        }
+        
+        list.push(order);
+
+        //localStorage.setItem("OrdersDB",JSON.stringify(list));
+        console.log("ModifyLocalStorage is inactive in controllerOrders -> addNewOrder")
+        console.log(list);
+
+    }
+
+
+
+//--- OLD FUNCTIONS
     printToConsole = () => {
 
         this.list.forEach( e => {
@@ -69,20 +109,9 @@ class ControllerOrders{
         localStorage.removeItem(id);
     }
 
+//--- END of Old Functions
 
-    nextOrder(){
-        if(this.list.length==0){
-            return "o1";
-        }
-       return this.list[this.list.length-1].id+1;
-    }
-
-    addNewOrder(order){
-
-        localStorage.setItem(order.id, JSON.stringify(order));
-
-    }
-
+//--- Utility Functions
 
     newCustomerLocalStorage = () => {
         let lista = [];
@@ -109,6 +138,8 @@ class ControllerOrders{
 
         localStorage.setItem("OrdersDB",JSON.stringify(lista));
     }
+//--- End of Utilitary Functions
+
 }
 
 export default ControllerOrders;
