@@ -1,4 +1,7 @@
+//Important: This controller is functional @21.10.2021
+
 import OrderDetails from "../model/orderDetails.js";
+import ControllerProducts from "./controllerProd.js";
 
 class ControllerOrderDetails{
 
@@ -8,7 +11,6 @@ class ControllerOrderDetails{
 
         this.read();
 
-
     }
 
     read = () => {
@@ -17,74 +19,121 @@ class ControllerOrderDetails{
 
         let storage = JSON.parse(localStorage.getItem("OrderDetailsDB"));
 
-        for(let item of storage){
-            this.list.push(item);
+        if(storage){
+            for(let item of storage){
+                this.list.push(item);
+            }
         }
 
-        console.log(this.list);
-
     }
 
-    printToConsole = () => {
+    nextOrderDetailsId = () => {
+        let storage = JSON.parse(localStorage.getItem("OrderDetailsDB"));
+        
+        if(storage){
+            let nrList = [];
 
-        this.list.forEach( e => {
-            console.log(e.returnOrderDetailsText());
-        })
+        for(let item of storage){
+            let nr = item.id.split("od")[1];
+            nr = parseInt(nr);
+            nrList.push(nr);
+        }
 
+        let nrMax = Math.max(...nrList);
+        nrMax += 1;
+        let newId = "od" + nrMax;
+        return newId;
+        }else{
+            return "od1";
+        }
     }
 
-    returnOrderDetailsObject(id){
-        for(let i=0; i>this.list.length; i++){
-
-            if(this.list[i].name == name){
-
-                return this.list[i];
-
+    returnOrderDetailsObject = (id) => {
+        for(let item of this.list){
+            if(item.id == id){
+                return item;
             }
+        }
+    }
 
+    returnFromOrIdPrdId = (orderId, productId) => {
+        for(let item of this.list){
+            if(item.orderId == orderId && item.productId == productId){
+                console.log(item);
+                return item;
+            }
         }
         return "";
     }
 
-    updateQuantity(id,quantity){
+    addNewOrderDetail = (id,orderId,productId,totalPrice,quantity) => {
 
-        let obj = this.returnOrderDetailsObject(id);
+        let list = [];
 
-        obj.quantity = quantity;
+        let newOrderDetails = new OrderDetails(id,orderId,productId,totalPrice,quantity);
 
-        localStorage.setItem(obj.id, JSON.stringify(obj));
-    }
+        newOrderDetails = JSON.parse(JSON.stringify(newOrderDetails));
 
-    deleteItem(id){
-        localStorage.removeItem(id);
-    }
+        let storage = JSON.parse(localStorage.getItem("OrderDetailsDB"));
 
-    nextOrderDetails = () => {
-
-        this.read();
-
-        if(this.list.length==0){
-            return "od1";
+        if(storage){
+            for(let item of storage){
+                list.push(item);
+            }
         }
-       return this.list[0].id+1;
+
+        list.push(newOrderDetails);
+
+        //localStorage.setItem("OrderDetailsDB",JSON.stringify(list));
+        console.log("ModifyLocalStorage is inactive in controllerOrderDetails -> addNewOrderDetail");
+        console.log(list);
+
+
     }
 
-    addNewOrderDetails(order){
+    updateQuantity = (id,quantity) => {
 
-        localStorage.setItem(order.id, JSON.stringify(order));
+        let storage = JSON.parse(localStorage.getItem("OrderDetailsDB"));
 
-    }
+        let list = [];
 
+        for(let item of storage){
+            if(item.id !== id){
+                list.push(item);
+            }else{
+                item.quantity = quantity;
 
-    orderDetailsRead = (orderId) => {
+                let productPrice = new ControllerProducts().returnProductObject(item.productId).price;
 
-        for (let item of this.list){
-            console.log(item);
-            // if(orderId == item.orderId){
-            //     console.log("aici");
-            // }
+                let totalPrice = quantity * productPrice;
+
+                item.price = totalPrice;
+                list.push(item);
+            }
         }
+
+        localStorage.setItem("OrderDetailsDB",JSON.stringify(list));
+
     }
+
+    deleteOrderDetails = (id) => {
+        let list = [];
+
+        let storage = JSON.parse(localStorage.getItem("OrderDetailsDB"));
+
+        if(storage){
+            for(let item of storage){
+                if(item.id !== id){
+                    list.push(item);
+                }
+            }
+        }
+
+        localStorage.setItem("OrderDetailsDB", JSON.stringify(list));
+    }
+
+
+//--- Utility Functions
 
     newOrderDetailsLocalStorage = () => {
 
@@ -103,7 +152,7 @@ class ControllerOrderDetails{
 
     }
 
-
+//--- End of Utility Functions
 
 }
 

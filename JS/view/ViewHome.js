@@ -1,6 +1,7 @@
 import ControllerCustomers from "../controller/controllerCustomers.js";
 import ControllerProducts from "../controller/controllerProd.js";
 import ControllerOrders from "../controller/controllerOrders.js";
+import ControllerOrderDetails from "../controller/controllerOrderDetails.js";
 
 import Customers from "../model/customers.js";
 import Orders from "../model/orders.js"
@@ -22,10 +23,13 @@ export default class ViewHome{
         this.controllerOrders = new ControllerOrders();
 
         this.controllerProduct = new ControllerProducts();
+
+        this.controllerOrderDetails = new ControllerOrderDetails();
         
         this.container = document.querySelector(".container");
         
         this.callMainPage();
+
         
     }
 
@@ -54,7 +58,6 @@ export default class ViewHome{
 
         this.shoppingCart = document.querySelector('.shopping-cart');
         this.shoppingCart.addEventListener("click",this.onShoppingCartClick);
-
 
     }
     
@@ -170,7 +173,7 @@ export default class ViewHome{
             productName = obj.parentNode.parentNode.children[1].children[0].textContent;
         }
 
-        const clickedObj = this.controllerProduct.returnProductObject(productName);
+        const clickedObj = this.controllerProduct.returnProductObjectFromName(productName);
 
         new ViewDetails(clickedObj,this.order);
     }
@@ -182,7 +185,7 @@ export default class ViewHome{
     //+++ Backend Functions
 
     //** Add New Order Based on current customer
-    addOrder = (currentCustomer) => {
+    addOrder = (currentCustomer="c1") => {
         this.controllerOrders.addNewOrder(
             this.controllerOrders.nextOrderId(),
             this.controllerCustomers.returnCustomerObject(currentCustomer).id,
@@ -191,6 +194,17 @@ export default class ViewHome{
             this.controllerCustomers.returnCustomerObject(currentCustomer).billing_address,
             this.controllerCustomers.returnCustomerObject(currentCustomer).email,
             "in processing"
+        );
+    }
+
+    //** Add A New Order Details based on order id and product id */
+    addOrderDetails = (orderId="o1",productId="p2") => {
+        this.controllerOrderDetails.addNewOrderDetail(
+            this.controllerOrderDetails.nextOrderDetailsId(),
+            this.controllerOrders.returnOrderObject(orderId).id,
+            this.controllerProduct.returnProductObject(productId).id,
+            this.controllerProduct.returnProductObject(productId).price,
+            1
         );
     }
 

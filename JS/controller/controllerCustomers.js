@@ -1,3 +1,5 @@
+//Important: This controller is functional @21.10.2021
+
 import Customers from "../model/customers.js";
 
 class ControllerCustomers{
@@ -5,7 +7,7 @@ class ControllerCustomers{
     constructor(){
         this.list = [];
         this.read();
-    }   
+    }
 
     read = () => {
 
@@ -13,8 +15,10 @@ class ControllerCustomers{
 
         let storage = JSON.parse(localStorage.getItem("CustomersDB"));
 
-        for(let item of storage){
-            this.list.push(item);
+        if(storage){
+            for(let item of storage){
+                this.list.push(item);
+            }
         }
     };
 
@@ -23,16 +27,20 @@ class ControllerCustomers{
         
         let nrList = [];
 
-        for(let item of storage){
-            let nr = item.id.split("c")[1];
-            nr = parseInt(nr);
-            nrList.push(nr);
+        if(storage){
+            for(let item of storage){
+                let nr = item.id.split("c")[1];
+                nr = parseInt(nr);
+                nrList.push(nr);
+            }
+    
+            let nrMax = Math.max(...nrList);
+            nrMax += 1;
+            let newId = "c" + nrMax;
+            return newId;
+        }else{
+            return "c1";
         }
-
-        let nrMax = Math.max(...nrList);
-        nrMax += 1;
-        let newId = "c" + nrMax;
-        return newId;
     }
 
     returnCustomerObject = (id) => {

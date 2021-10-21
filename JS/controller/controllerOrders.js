@@ -1,3 +1,5 @@
+//Important: This controller is functional @21.10.2021
+
 import Orders from "../model/orders.js";
 import Customers from "../model/customers.js";
 
@@ -23,6 +25,7 @@ class ControllerOrders{
             }
         }
     }
+
     nextOrderId = () => {
         let storage = JSON.parse(localStorage.getItem("OrdersDB"));
         
@@ -45,6 +48,33 @@ class ControllerOrders{
         
     }
 
+    returnOrderObject = (id) => {
+        for(let item of this.list){
+            if(item.id == id){
+                return item;
+            }
+        }
+    }
+
+    returnOrderObjFromName = (name) => {
+
+        for(let item of this.list){
+            if(item.name == name){
+                return item;
+            }
+        }
+
+        return "";
+
+        //+++ OLD Version
+        // for(let i=0; i<this.list.length; i++){
+        //     if(this.list[i].name == name){
+        //         return this.list[i];
+        //     }
+        // }
+        // return "";
+    }
+
     addNewOrder(id,clientId,nrOfOrders=0,shippAdd,orderAdd,email,status){
         let list = [];
 
@@ -64,67 +94,50 @@ class ControllerOrders{
         
         list.push(order);
 
-        //localStorage.setItem("OrdersDB",JSON.stringify(list));
+        // localStorage.setItem("OrdersDB",JSON.stringify(list));
         console.log("ModifyLocalStorage is inactive in controllerOrders -> addNewOrder")
         console.log(list);
 
     }
 
+    updateShippingAddress = (id,newAddress) => {
 
+        let storage = JSON.parse(localStorage.getItem("OrdersDB"));
 
-//--- OLD FUNCTIONS
-    printToConsole = () => {
-
-        this.list.forEach( e => {
-            console.log(e.returnOrdersText());
-        })
-
-    }
-
-    returnOrderObject(name){
-
-        for(let i=0; i<this.list.length; i++){
-
-            if(this.list[i].name == name){
-
-                return this.list[i];
-
+        let list = [];
+        
+        for(let item of storage){
+            if(item.id !== id){
+                list.push(item);
+            }else{
+                item.shipping_address = newAddress;
+                list.push(item);
             }
-
         }
 
-        return "";
+        localStorage.setItem("OrdersDB",JSON.stringify(list));
+        
+
     }
 
-    updateShippingAddress(name, shipping_address){
+    deleteOrder = (id) => {
+        let list = [];
 
-        let obj = this.returnOrderObject(name);
+        let storage = JSON.parse(localStorage.getItem("OrdersDB"));
 
-        obj.shipping_address = shipping_address;
+        if(storage){
+            for(let item of storage){
+                if(item.id !== id){
+                    list.push(item);
+                }
+            }
+        }
 
-        localStorage.setItem(obj.id, JSON.stringify(obj));
+        localStorage.setItem("OrdersDB",JSON.stringify(list));
     }
-
-    deleteItem(id){
-        localStorage.removeItem(id);
-    }
-
-//--- END of Old Functions
 
 //--- Utility Functions
 
-    newCustomerLocalStorage = () => {
-        let lista = [];
-
-        let c1 = new Customers("c1","customer1@ex.com","pass1234","John Doe","Street. 1234","Default Str. 4321", "USA","+039123123123");
-        let c2 = new Customers("c2","customer2@ex.com","pass0000","Jane Smith","Street. 1011","Default Str. 101", "USA","+039010101010");
-
-        lista.push(c1);
-        lista.push(c2);
-
-        localStorage.setItem("CustomersDB", JSON.stringify(lista));
-
-    }
 
     newOrdersLocalStorage = () => {
         let lista = [];

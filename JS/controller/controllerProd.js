@@ -1,3 +1,5 @@
+//Important: This controller is functional @21.10.2021
+
 import Product from "../model/products.js";
 
 class ControllerProducts{
@@ -7,7 +9,6 @@ class ControllerProducts{
         this.list = [];
 
         this.read();
-
 
     }
 
@@ -25,64 +26,120 @@ class ControllerProducts{
 
     }
 
+    nextProductId = () => {
 
-//--- OLD FUNCTIONS
+        let storage = JSON.parse(localStorage.getItem("ProductsDB"));
+        
+        let nrList = [];
+
+        if(storage){
+            for(let item of storage){
+                let nr = item.id.split("p")[1];
+                nr = parseInt(nr);
+                nrList.push(nr);
+            }
     
-    printToConsole = () => {
-        this.list.forEach(e => {
-            console.log(e.returnText());
-        });
+            let nrMax = Math.max(...nrList);
+            nrMax += 1;
+            let newId = "p" + nrMax;
+            return newId;
+        } else{
+            return "p1";
+        }
     }
 
-    returnProductObject(name){
-
-        for(let i=0; i<this.list.length; i++){
-
-            if(this.list[i].name == name){           
-               return this.list[i];
+    returnProductObject = (id) => {
+        for(let item of this.list){
+            if(item.id == id){
+                return item;
             }
-
         }
+    }
 
+    returnProductObjectFromName(name){
+
+        for(let item of this.list){
+            if(item.name == name){
+                return item;
+            }
+        }
         return "";
 
-
-        // let obj={};
-       
-        // this.list.forEach(e => {
-
-                    
-        //     if(e.name== name){
-
-        //         console.log(e.name);
-
-        //         obj={...e};
+        //+++ OLD Version
+        // for(let i=0; i<this.list.length; i++){
+        //     if(this.list[i].name == name){           
+        //        return this.list[i];
         //     }
-        // })
-
-
-        // console.log(obj);
-        // if(obj){
-
-        //     return obj;
         // }
-
         // return "";
+
     }
 
-    updateDescription(name,description){
-     
-        let obj=this.returnProductObject(name);
+    addNewProduct = (name,price,description,image) => {
 
-        //localStorage.removeItem(obj.id);
+        let list = [];
 
-        obj.description=description;
-        localStorage.setItem(obj.id, JSON.stringify(obj));
+        let newProduct = new Product(this.nextProductId(),name,price,description,image);
+
+        newProduct = JSON.parse(JSON.stringify(newProduct));
+
+        let storage = JSON.parse(localStorage.getItem("ProductsDB"));
+
+        if(storage){
+            for(let item of storage){
+                list.push(item);
+            }
+        }
+
+        list.push(newProduct);
+
+        //localStorage.setItem("ProductsDB",JSON.stringify(list));
+        console.log("ModifyLocalStorage is inactive in controllerProd -> addNewProduct");
+        console.log(list);
+
     }
 
-    deleteItem(id){
-        localStorage.removeItem(id);
+    updateName = (id,name) => {
+
+        let storage = JSON.parse(localStorage.getItem("ProductsDB"));
+
+        let list = [];
+        
+        for(let item of storage){
+            if(item.id !== id){
+                list.push(item);
+            }else{
+                item.name = name;
+                list.push(item);
+            }
+        }
+
+        localStorage.setItem("ProductsDB",JSON.stringify(list));
+        
+
     }
+
+    deleteProduct = (id) => {
+        
+        let list = [];
+
+        let storage = JSON.parse(localStorage.getItem("ProductsDB"));
+
+        if(storage){
+            for(let item of storage){
+                if(item.id !== id){
+                    list.push(item);
+                }
+            }
+        }
+
+        localStorage.setItem("ProductsDB", JSON.stringify(list));
+    }  
+
+
+
+//--- Utility Functions
+
 
     newSetProducts = () => {
         let lista = [];
