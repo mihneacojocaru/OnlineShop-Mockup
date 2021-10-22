@@ -33,16 +33,16 @@ class ControllerOrderDetails{
         if(storage){
             let nrList = [];
 
-        for(let item of storage){
-            let nr = item.id.split("od")[1];
-            nr = parseInt(nr);
-            nrList.push(nr);
-        }
+            for(let item of storage){
+                let nr = item.id.split("od")[1];
+                nr = parseInt(nr);
+                nrList.push(nr);
+            }
 
-        let nrMax = Math.max(...nrList);
-        nrMax += 1;
-        let newId = "od" + nrMax;
-        return newId;
+            let nrMax = Math.max(...nrList);
+            nrMax += 1;
+            let newId = "od" + nrMax;
+            return newId;
         }else{
             return "od1";
         }
@@ -66,11 +66,11 @@ class ControllerOrderDetails{
         return "";
     }
 
-    addNewOrderDetail = (id,orderId,productId,totalPrice,quantity) => {
+    addNewOrderDetail = (newObject) => {
 
         let list = [];
 
-        let newOrderDetails = new OrderDetails(id,orderId,productId,totalPrice,quantity);
+        let newOrderDetails = newObject;
 
         newOrderDetails = JSON.parse(JSON.stringify(newOrderDetails));
 
@@ -84,9 +84,9 @@ class ControllerOrderDetails{
 
         list.push(newOrderDetails);
 
-        //localStorage.setItem("OrderDetailsDB",JSON.stringify(list));
-        console.log("ModifyLocalStorage is inactive in controllerOrderDetails -> addNewOrderDetail");
-        console.log(list);
+        localStorage.setItem("OrderDetailsDB",JSON.stringify(list));
+        // console.log("ModifyLocalStorage is inactive in controllerOrderDetails -> addNewOrderDetail");
+        // console.log(list);
 
 
     }
@@ -102,12 +102,6 @@ class ControllerOrderDetails{
                 list.push(item);
             }else{
                 item.quantity = quantity;
-
-                let productPrice = new ControllerProducts().returnProductObject(item.productId).price;
-
-                let totalPrice = quantity * productPrice;
-
-                item.price = totalPrice;
                 list.push(item);
             }
         }
@@ -132,6 +126,24 @@ class ControllerOrderDetails{
         localStorage.setItem("OrderDetailsDB", JSON.stringify(list));
     }
 
+     //orderId =>lista cu detalii
+
+     returnDetailsByOrder = (orderId) =>{
+  
+        return  this.list.filter(e=>e.orderId == orderId);
+
+        // let list = [];
+
+        // this.list.forEach( e => {
+        //     if(e.orderId == orderId){
+        //         list.push(e);
+        //     }
+        // });
+
+        // return list;
+    }
+
+
 
 //--- Utility Functions
 
@@ -153,6 +165,35 @@ class ControllerOrderDetails{
     }
 
 //--- End of Utility Functions
+
+//--- Old Functions
+
+// updateQuantity = (id,quantity) => {
+
+//     let storage = JSON.parse(localStorage.getItem("OrderDetailsDB"));
+
+//     let list = [];
+
+//     for(let item of storage){
+//         if(item.id !== id){
+//             list.push(item);
+//         }else{
+//             item.quantity = quantity;
+
+//             let productPrice = new ControllerProducts().returnProductObject(item.productId).price;
+
+//             let totalPrice = quantity * productPrice;
+
+//             item.price = totalPrice;
+//             list.push(item);
+//         }
+//     }
+
+//     localStorage.setItem("OrderDetailsDB",JSON.stringify(list));
+
+// }
+
+//--- End of Old Functions
 
 }
 

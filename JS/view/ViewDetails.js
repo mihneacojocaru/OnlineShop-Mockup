@@ -29,7 +29,7 @@ export default class ViewDetails{
 
         this.addToCart = document.getElementById('addToCart');
         
-        //this.addToCart.addEventListener("click",this.newOrderDetails);
+        this.addToCart.addEventListener("click",this.onAddToCart);
 
 
     }
@@ -81,6 +81,23 @@ export default class ViewDetails{
     }
 
     onAddToCart = () => {    
+
+    let detalii = new OrderDetails(
+    this.controllerOrderDetails.nextOrderDetailsId(),
+    this.order.id,
+    this.produs.id,
+    this.produs.price,
+    1
+    );
+
+
+    //updatez stocul produsului 
+    //updatez order 
+    //verificarea daca mai exista in cos 
+    //produsl respectiv si daca da
+    //atunci update la detallii produs    
+
+    this.controllerOrderDetails.addNewOrderDetail(detalii);
         
     }
 

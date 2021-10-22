@@ -1,9 +1,17 @@
+import ControllerOrderDetails from "../controller/controllerOrderDetails.js";
+import ControllerProducts from "../controller/controllerProd.js";
 import ViewHome from "./ViewHome.js";
 
+//control products
+
+//control details
 
 export default class ViewCart{
 
     constructor(order){
+
+        this.ctrlOrderDetails = new ControllerOrderDetails();
+        this.ctrlProducts = new ControllerProducts();
 
         this.main = document.querySelector('main');
         this.main.innerHTML = "";
@@ -13,9 +21,17 @@ export default class ViewCart{
         this.allOfIt();
         this.main.appendChild(this.cart);
 
+        this.prodCont = document.querySelector(".cart--container");
+        
         this.goBack();
+        this.order=order;
+
+        console.log(this.order);
+        this.attachCards();
 
     }
+
+
 
     allOfIt = () => {
         let myContent = `<div class="top--section">
@@ -27,28 +43,7 @@ export default class ViewCart{
                 <span>Your Cart</span>
                 <span>(2)</span>
             </div>
-            <div class="cart--container">
-                <div class="cart--element">
-                    <div class="product--image">
-                        <img src="https://s13emagst.akamaized.net/products/20507/20506551/images/res_76761b3617cbb5c268a0b62319565011.jpg?width=450&height=450&hash=E5C7983230CE05E06DEF75CF697390BF" alt="product">
-                    </div>
-                    <div class="product--info">
-                        <div class="info--subcontainer">
-                            <p>Masina Electrica Gazon</p>
-                            <span>Description</span>
-                            <div class="button--elements">
-                                <label>Quantity</label>
-                                <input id="itemQuantity" type="number" min="0" max="1000">
-                                <button>Remove</button>
-                            </div>
-                        </div>
-                        <div class="price">
-                            <span>100€</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+            <div class="cart--container"></div>
         </div>
         <div class="summary--container">
             <div class="summary summary--top">
@@ -77,7 +72,7 @@ export default class ViewCart{
         this.cart.innerHTML += myContent;
     }
 
-    cartElement = (obj) => {
+    cartElement = (obj ,quantity) => {
         let element = `
         <div class="cart--element">
         <div class="product--image">
@@ -86,19 +81,21 @@ export default class ViewCart{
         <div class="product--info">
             <div class="info--subcontainer">
                 <p>${obj.name}</p>
-                <span>Description</span>
+                <span>${obj.description}</span>
                 <div class="button--elements">
                     <label>Quantity</label>
-                    <input id="itemQuantity" type="number" min="0" max="1000">
+                    <input id="itemQuantity" type="number" min="1" max="1000" placeholder="${quantity}">
                     <button>Remove</button>
                 </div>
             </div>
             <div class="price">
-                <span>${obj.price}/span>
+                <span>${obj.price*quantity}€</span>
             </div>
         </div>
     </div>
         `;
+
+        return element;
     }
 
     goBack = () => {
@@ -107,6 +104,29 @@ export default class ViewCart{
             new ViewHome();
         })
     }
+
+    attachCards = () => {
+    
+        let orderDetails=this.ctrlOrderDetails.returnDetailsByOrder(this.order.id);
+
+        console.log(orderDetails);
+         let cards="";
+
+         orderDetails.forEach(element => {
+
+            
+             let product=this.ctrlProducts.returnProductObject(element.productId);
+
+             cards+=this.cartElement(product,element.quantity);
+
+             
+         });
+
+         this.prodCont.innerHTML = cards;
+
+
+    }
+
 
 
 }

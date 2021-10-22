@@ -13,8 +13,18 @@ import ViewCart from "./ViewCart.js";
 export default class ViewHome{
 
     constructor(){
+        this.customer = new Customers("c1234","john.doe@example.com","password","John Doe","First Str. 123","Second Str. 321","USA","+900123123123");
 
-        this.customer = new Customers("c1234","john.doe@example.com","password","John Doe","First Street 123","Second Street 321","USA","+900123123123");
+        this.order = new Orders(
+            "o1",
+            this.customer.id,
+            0,
+            this.customer.default_shipping_address,
+            this.customer.billing_address,
+            this.customer.email,
+            "22-10-2021",
+            "in processing"
+        );
 
         this.customer.returnCustomersText();
 
@@ -29,6 +39,7 @@ export default class ViewHome{
         this.container = document.querySelector(".container");
         
         this.callMainPage();
+
 
         
     }
@@ -179,7 +190,7 @@ export default class ViewHome{
     }
 
     onShoppingCartClick = () => {
-        new ViewCart();
+        new ViewCart(this.order);
     }
 
     //+++ Backend Functions
