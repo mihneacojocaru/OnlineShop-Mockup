@@ -112,13 +112,11 @@ export default class ViewDetails{
             this.produs.price,
             1
         );
-
-        console.log(this.details);
         
        this.controllerOrderDetails.addNewOrderDetails(this.details);
 
         
-        alert("adaugat cu succes");
+        alert("Sucessfuly added to cart!");
 
 
         

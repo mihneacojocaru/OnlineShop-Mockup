@@ -84,7 +84,7 @@ export default class ViewCart{
                 <span>${obj.description}</span>
                 <div class="button--elements">
                     <label>Quantity</label>
-                    <input id="itemQuantity" type="number" min="1" max="1000" placeholder="${quantity}">
+                    <input id="itemQuantity" type="number" min="1" max="1000" value="${quantity}">
                     <button>Remove</button>
                 </div>
             </div>
@@ -107,24 +107,16 @@ export default class ViewCart{
 
     attachCards = () => {
     
-        let orderDetails=this.ctrlOrderDetails.returnDetailsByOrder(this.order.id);
+        let orderDetails = this.ctrlOrderDetails.returnDetailsByOrder(this.order.id);
 
-        console.log(orderDetails);
-         let cards="";
+        let cards = "";
 
-         orderDetails.forEach(element => {
-
-            
-             let product=this.ctrlProducts.returnProductObject(element.productId);
-
-             cards+=this.cartElement(product,element.quantity);
-
-             
+        orderDetails.forEach(element => {
+             let product = this.ctrlProducts.returnProductObject(element.productId);
+             cards += this.cartElement(product,element.quantity);   
          });
 
          this.prodCont.innerHTML = cards;
-
-
     }
 
 
